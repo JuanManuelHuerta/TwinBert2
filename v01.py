@@ -123,7 +123,7 @@ class CosineContrastiveLoss(nn.Module):
 
 criterion = CosineContrastiveLoss()
 #optimizer = optim.Adam(model.parameters(),lr = 0.0005 )
-optimizer = optim.AdamW(model.parameters(),lr = 0.0005 )
+optimizer = optim.AdamW(model.parameters(),lr = 0.0001 )
 
 def train(epoch):
     model.train()
