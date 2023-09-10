@@ -75,7 +75,7 @@ model = TwinBert()
 model.to(device)
 
 MAX_LEN = 200
-TRAIN_BATCH_SIZE = 8
+TRAIN_BATCH_SIZE = 16
 VALID_BATCH_SIZE = 4
 EPOCHS = 1
 LEARNING_RATE = 1e-05
