@@ -70,7 +70,7 @@ class TwinBert(nn.Module):
         output2 = self.forward_once(ids[1],mask[1], token_type_ids[1])
         return output1,output2
         
-df = pd.read_csv("train.csv")   # Dataset : https://www.kaggle.com/c/quora-question-pairs
+df = pd.read_csv("data/train.csv")   # Dataset : https://www.kaggle.com/c/quora-question-pairs
 model = TwinBert()
 model.to(device)
 
@@ -135,7 +135,8 @@ def train(epoch):
         output1,output2 = model(ids, mask, token_type_ids)
         optimizer.zero_grad()
         loss = criterion(output1,output2,targets)
-        if _%5000==0:
+
+        if _%50==0:
             print(f'Step: {_}, Epoch: {epoch}, Loss:  {loss.item()}')
         
         optimizer.zero_grad()
@@ -172,6 +173,7 @@ outputs = np.array(outputs) >= 0.5
 accuracy = metrics.accuracy_score(targets, outputs)
 f1_score_micro = metrics.f1_score(targets, outputs, average='micro')
 f1_score_macro = metrics.f1_score(targets, outputs, average='macro')
+
 print(f"Accuracy Score = {accuracy}")
 print(f"F1 Score (Micro) = {f1_score_micro}")
 print(f"F1 Score (Macro) = {f1_score_macro}")
